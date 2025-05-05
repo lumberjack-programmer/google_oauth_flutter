@@ -1,9 +1,29 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_oauth_flutter/screens/auth/login_screen.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class HomeScreen extends StatelessWidget {
+  final User? user;
+
   const HomeScreen({
     super.key,
+    required this.user,
   });
+
+  Future<void> _handleSignOut(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    final googleSignIn = GoogleSignIn();
+    await googleSignIn.signOut();
+
+    if (!context.mounted) {
+      return;
+    }
+
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (_) => const LoginScreen()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +40,12 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 50,
-                      backgroundImage: null,
+                      backgroundImage: NetworkImage(user?.photoURL ?? ''),
                       backgroundColor: Colors.grey[200],
                     ),
                     const SizedBox(height: 24),
                     Text(
-                      'No Name',
+                      user?.displayName ?? 'No Name',
                       style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -34,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'No Email',
+                      user?.email ?? 'No Email',
                       style: const TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
@@ -48,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () {
                           // TODO: Implement sign out
-                          Navigator.pop(context);
+                          _handleSignOut(context);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.red[400],

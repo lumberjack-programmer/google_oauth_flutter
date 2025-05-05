@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "640364536011",
+    "project_id": "login-with-aa4e6",
+    "storage_bucket": "login-with-aa4e6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640364536011:android:7e2003ae809bfe3126fb4e",
+        "android_client_info": {
+          "package_name": "com.example.google_oauth_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaQeG7AqQ555Xbbhfg9KpZec8l6MmyRSM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
